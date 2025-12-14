@@ -30,6 +30,55 @@
   
 
 <style>
+/* Parallax solo con CSS */
+.fondo-parallax-css {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  background-image: url("/static/img/mini_1_jfjf8.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* Esto crea el efecto parallax */
+  animation: movimientoSuave 60s infinite linear;
+}
+
+@keyframes movimientoSuave {
+  0% {
+    background-position: center center;
+    transform: scale(1);
+  }
+  25% {
+    background-position: 10% 10%;
+    transform: scale(1.02);
+  }
+  50% {
+    background-position: center 20%;
+    transform: scale(1);
+  }
+  75% {
+    background-position: 20% center;
+    transform: scale(1.02);
+  }
+  100% {
+    background-position: center center;
+    transform: scale(1);
+  }
+}
+
+/* Efecto 3D con perspectiva */
+.fondo-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+
+
+
+  
 #adminCard {
   max-width: 500px;
   margin-left: auto;
