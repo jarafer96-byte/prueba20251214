@@ -47,7 +47,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
+    background-attachment: scroll !important; /* CAMBIO CLAVE */
+    height: 100vh !important;
+    min-height: -webkit-fill-available !important;
   }
   .barra-navegacion {
     border: 1px solid #000000f5; /* borde solo en móvil */
