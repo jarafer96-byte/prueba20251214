@@ -46,19 +46,19 @@ body, html {
 
     /* Capa 1: cielo */
     .cielo {
-      background-image: url('cielo.jpg'); /* JPG grande */
+      background-image: url("/static/img/cielo.jpeg");
       z-index: 1;
     }
 
     /* Capa 2: montañas */
     .montanas {
-      background-image: url('montanas.png'); /* PNG con transparencia */
+      background-image: url("/static/montanas.jpeg");
       z-index: 2;
     }
 
     /* Capa 3: nubes */
     .nubes {
-      background-image: url('nubes.png'); /* PNG con transparencia */
+      background-image: uurl("/static/img/nubes.jpeg");
       z-index: 3;
     }
   
@@ -77,19 +77,7 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 
   }
 }  
   
-/* 📱 Para móviles */
-@media (max-width: 768px) {
-  body {
-    background-image: url("/static/img/mini_1_jfjf8.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-  }
-  .barra-navegacion {
-    border: 1px solid #000000f5; /* borde solo en móvil */
-  }
-}
+
 
 h1, h2, h3, .btn, .card { font-family: 'Raleway', sans-serif; }
 
@@ -622,10 +610,9 @@ input.stock-edit {
 </head>
 <body class="container py-5 modo-oscuro">
   
- <div class="fondo-parallax" id="fondoParallax"></div>
-  
-  <!-- Fondo animado actual (ya lo tienes) -->
-  <div class="fondo-animado"></div>  
+  <div class="layer cielo"></div>
+  <div class="layer montanas"></div>
+  <div class="layer nubes"></div>
 
   <div class="text-center my-5 logo-wrapper">
     <img src="/static/img/Copilot_20251101_125947.png"
@@ -892,6 +879,22 @@ document.getElementById('loginToggleBtn').onclick = () => {
   const form = document.getElementById('loginFloatingForm');
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
 };
+
+    
+ window.addEventListener("deviceorientation", (event) => {
+      const x = event.gamma; // izquierda/derecha
+      const y = event.beta;  // adelante/atrás
+
+      moverCapa(".cielo", x, y, 5);
+      moverCapa(".montanas", x, y, 10);
+      moverCapa(".nubes", x, y, 20);
+    });
+
+    function moverCapa(selector, x, y, intensidad) {
+      const capa = document.querySelector(selector);
+      capa.style.transform = `translate(${x * intensidad}px, ${y * intensidad}px)`;
+    }    
+
     
 document.getElementById("tallesProd").addEventListener("input", function() {
   const talles = this.value.split(",").map(t => t.trim()).filter(Boolean);
