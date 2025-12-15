@@ -26,13 +26,41 @@
 
 <style>
 
-body {
-  font-family: 'Raleway', sans-serif;
-  
-  background-image: url("/static/img/mini_1_jfjf8.jpeg");
-  
-  background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center; padding-top: 70px;
-}
+body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .layer {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      top: -10%;
+      left: -10%;
+      background-size: cover;
+      background-position: center;
+      will-change: transform;
+    }
+
+    /* Capa 1: cielo */
+    .cielo {
+      background-image: url('cielo.jpg'); /* JPG grande */
+      z-index: 1;
+    }
+
+    /* Capa 2: montañas */
+    .montanas {
+      background-image: url('montanas.png'); /* PNG con transparencia */
+      z-index: 2;
+    }
+
+    /* Capa 3: nubes */
+    .nubes {
+      background-image: url('nubes.png'); /* PNG con transparencia */
+      z-index: 3;
+    }
   
 body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: -1; }  
   
