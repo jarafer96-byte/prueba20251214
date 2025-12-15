@@ -26,41 +26,27 @@
 
 <style>
 
-body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-    }
+body {
+  font-family: 'Raleway', sans-serif;
+  
+  background-image: url("/static/img/mini_1_jfjf8.jpeg");
+  
+  background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center; padding-top: 70px;
+}
 
-    .layer {
-      position: absolute;
-      width: 120%;
-      height: 120%;
-      top: -10%;
-      left: -10%;
-      background-size: cover;
-      background-position: center;
-      will-change: transform;
-    }
-
-    /* Capa 1: cielo */
-    .cielo {
-      background-image: url("/static/img/cielo.jpg");
-      z-index: 1;
-    }
-
-    /* Capa 2: montañas */
-    .montanas {
-      background-image: url("/static/montanas.png");
-      z-index: 2;
-    }
-
-    /* Capa 3: nubes */
-    .nubes {
-      background-image: uurl("/static/img/nubes.png");
-      z-index: 3;
-    }
+/* 📱 Para móviles */
+@media (max-width: 768px) {
+  body {
+    background-image: url("/static/img/mini_1_jfjf8.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  .barra-navegacion {
+    border: 1px solid #000000f5; /* borde solo en móvil */
+  }
+}
   
 body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: -1; }  
   
@@ -76,8 +62,6 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 
     max-width: 95%;
   }
 }  
-  
-
 
 h1, h2, h3, .btn, .card { font-family: 'Raleway', sans-serif; }
 
@@ -609,10 +593,6 @@ input.stock-edit {
 </style>
 </head>
 <body class="container py-5 modo-oscuro">
-  
-  <div class="layer cielo"></div>
-  <div class="layer montanas"></div>
-  <div class="layer nubes"></div>
 
   <div class="text-center my-5 logo-wrapper">
     <img src="/static/img/Copilot_20251101_125947.png"
@@ -620,8 +600,6 @@ input.stock-edit {
          class="img-fluid logo mx-auto d-block"
          loading="lazy">
   </div>
-
-
 
 <div class="text-center mb-4">
     <div class="descripcion-emprendimiento">
@@ -879,22 +857,6 @@ document.getElementById('loginToggleBtn').onclick = () => {
   const form = document.getElementById('loginFloatingForm');
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
 };
-
-    
- window.addEventListener("deviceorientation", (event) => {
-      const x = event.gamma; // izquierda/derecha
-      const y = event.beta;  // adelante/atrás
-
-      moverCapa(".cielo", x, y, 5);
-      moverCapa(".montanas", x, y, 10);
-      moverCapa(".nubes", x, y, 20);
-    });
-
-    function moverCapa(selector, x, y, intensidad) {
-      const capa = document.querySelector(selector);
-      capa.style.transform = `translate(${x * intensidad}px, ${y * intensidad}px)`;
-    }    
-
     
 document.getElementById("tallesProd").addEventListener("input", function() {
   const talles = this.value.split(",").map(t => t.trim()).filter(Boolean);
