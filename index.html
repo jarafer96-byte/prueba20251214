@@ -2890,6 +2890,52 @@ function irAContacto() {
   if (contacto) contacto.scrollIntoView({ behavior: 'smooth' });
 }
 window.irAContacto = irAContacto; // si usás módulos
+
+
+// 🔥 FUNCIÓN PARA FORZAR ACTUALIZACIÓN DESPUÉS DE EDITAR
+function actualizarProductoEnArrayGlobal(id_base, nuevosDatos) {
+  if (!window.todosLosProductos) return;
+  
+  const index = window.todosLosProductos.findIndex(p => p.id_base === id_base);
+  if (index !== -1) {
+    // Preservar el precio_anterior si existe en los nuevos datos
+    window.todosLosProductos[index] = {
+      ...window.todosLosProductos[index], // mantener datos existentes
+      ...nuevosDatos, // aplicar nuevos datos
+      // 🔥 Asegurar que precio_anterior se mantenga si no viene en nuevosDatos
+      precio_anterior: nuevosDatos.precio_anterior || window.todosLosProductos[index].precio_anterior
+    };
+    
+    console.log(`✅ Producto actualizado en array global: ${id_base}`);
+    console.log(`   - Nuevo precio: ${nuevosDatos.precio}`);
+    console.log(`   - Precio anterior guardado: ${window.todosLosProductos[index].precio_anterior}`);
+    
+    // 🔥 Forzar re-render de este producto específico
+    setTimeout(() => {
+      const cardExistente = document.querySelector(`[data-id="${id_base}"]`);
+      if (cardExistente && cardExistente.parentNode) {
+        const nuevaCard = renderProducto(window.todosLosProductos[index]);
+        cardExistente.parentNode.replaceChild(nuevaCard, cardExistente);
+        console.log(`🔄 Card re-renderizada: ${id_base}`);
+      }
+    }, 500);
+  }
+}
+
+// 🔥 LLAMAR ESTA FUNCIÓN DESPUÉS DE GUARDAR EXITOSAMENTE
+// En tu función btnConfirmarProd, después de guardar exitosamente:
+if (data.status === "ok") {
+  // ... código existente ...
+  
+  // 🔥 Actualizar en array global
+  actualizarProductoEnArrayGlobal(p.id_base, {
+    nombre: nombre,
+    precio: precioNuevo,
+    precio_anterior: precioAnteriorParaEnviar, // <-- ESTO ES CLAVE
+    // ... otros campos
+  });
+}
+
     
 function renderProducto(p) {
   console.log("🎯 [RENDER-PRODUCTO] INICIO =====================================");
