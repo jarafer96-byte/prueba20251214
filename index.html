@@ -26,6 +26,48 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/static/img/faviconmovil.png">
 
 <style>
+
+/* Agregar en tu sección de estilos */
+.oferta-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(45deg, #ff4757, #ff3838);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  animation: pulseOferta 2s infinite;
+}
+
+@keyframes pulseOferta {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); 
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.5); 
+  }
+}
+
+/* Estilo para productos en oferta en la lista */
+.card-producto.oferta {
+  border-left: 4px solid #ff4757;
+}
+
+/* Badge para productos con descuento mayor a 20% */
+.oferta-especial {
+  background: linear-gradient(45deg, #ff9500, #ff5e3a) !important;
+}
+
+
+
+
+  
 #adminCard {
   max-width: 500px;
   margin-left: auto;
