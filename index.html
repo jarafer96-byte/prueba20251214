@@ -32,23 +32,24 @@
   margin-right: auto;
 }
 body {
-  font-family: 'Raleway', sans-serif;
-  background: url("/static/img/mini_1_jfjf8.jpeg") center / cover fixed no-repeat #000;
-  padding-top: 70px;
-}
-/* 📱 Para móviles */
-@media (max-width: 768px) {
-  body {
-    background: url("/static/img/mini_1_jfjf8.jpeg") center / cover no-repeat #000;
-    background-attachment: scroll !important;
+    background: 
+      radial-gradient(ellipse at top, #e3f2fd, transparent),
+      radial-gradient(ellipse at bottom, #f3e5f5, transparent) !important;
+    background-color: #fafafa !important;
+    min-height: 100vh !important;
   }
-  .barra-navegacion {
-    border: 1px solid #000000f5; /* borde solo en móvil */
+  
+  .container.py-5.modo-oscuro {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(15px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(15px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 16px !important;
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
   }
-  #adminCard {
-    max-width: 95%;
-  }
-}
+  
 h1, h2, h3, .btn, .card { font-family: 'Raleway', sans-serif; }
 
 .fade-reorder { opacity: 0; transform: scale(0.95); transition: opacity 0.3s ease, transform 0.3s ease; }
