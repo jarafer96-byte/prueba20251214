@@ -2611,24 +2611,34 @@ function mostrarGrupo(nombre, event, auto = false) {
   renderPagina(1, productosGrupo);
   renderPaginacion(productosGrupo);
 
+  // 🔥 ANIMACIÓN MEJORADA para panel subcategorías
   if (subcategorias.length > 0) {
     if (!auto) {
+      // Forzar reflow para animación
+      void panel.offsetWidth;
       panel.classList.remove('oculta');
-      console.log("📂 Panel subcategorias visible");
+      console.log("📂 Panel subcategorias visible (con animación)");
+      
+      // Asegurar que esté visible antes de ajustar posición
+      setTimeout(() => {
+        ajustarPosicionesPaneles();
+      }, 10);
     } else {
+      // Forzar reflow para animación
+      void panel.offsetWidth;
       panel.classList.add('oculta');
-      console.log("📂 Panel subcategorias oculto (auto)");
+      console.log("📂 Panel subcategorias oculto (auto, con animación)");
     }
   } else {
+    // Forzar reflow para animación
+    void panel.offsetWidth;
     panel.classList.add('oculta');
-    console.log("📂 Grupo sin subcategorías");
+    console.log("📂 Grupo sin subcategorías (oculto con animación)");
   }
 
   console.log("✅ Productos renderizados con paginación en #productos");
-  window.scrollTo({ top: 0, behavior: 'auto' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-window.mostrarGrupo = mostrarGrupo;
-
 // Extra: log de clicks en botones
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("btn-grupo")) {
