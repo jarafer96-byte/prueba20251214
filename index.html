@@ -26,45 +26,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/static/img/faviconmovil.png">
 
 <style>
-
-/* Transiciones suaves para paneles */
-.panel-grupos, .panel-subcategorias {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-origin: top;
-  will-change: transform, opacity;
-}
-
-/* Estados ocultos con animación */
-.panel-grupos.oculta, .panel-subcategorias.oculta {
-  opacity: 0;
-  transform: translateY(-10px) scaleY(0.9);
-  pointer-events: none;
-  max-height: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  overflow: hidden;
-}
-
-/* Estados visibles con animación */
-.panel-grupos:not(.oculta), .panel-subcategorias:not(.oculta) {
-  opacity: 1;
-  transform: translateY(0) scaleY(1);
-  pointer-events: auto;
-  max-height: 50vh;
-  overflow-y: hidden;
-}
-
-/* Asegurar que el contenedor mantenga su estructura */
-.panel-grupos-wrapper, .panel-subcategorias-wrapper {
-  transition: all 0.4s ease;
-  will-change: height;
-}
-
-
-
-
-  
 #adminCard {
   max-width: 500px;
   margin-left: auto;
@@ -623,6 +584,66 @@ input.stock-edit {
   z-index: 10;
   position: relative;
 }  
+
+
+
+/* ==================== */
+/* ANIMACIONES PARA PANELES - NUEVO */
+/* ==================== */
+
+.panel-grupos, .panel-subcategorias {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: top;
+  will-change: transform, opacity;
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* Estados ocultos con animación */
+.panel-grupos.oculta, .panel-subcategorias.oculta {
+  opacity: 0;
+  transform: translateY(-15px) scaleY(0.8);
+  pointer-events: none;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Estados visibles con animación */
+.panel-grupos:not(.oculta), .panel-subcategorias:not(.oculta) {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+  pointer-events: auto;
+  max-height: 300px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Para el scroll horizontal se mantiene */
+.panel-grupos:not(.oculta), .panel-subcategorias:not(.oculta) {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Transición para el contenido interno */
+.panel-grupos > *, .panel-subcategorias > * {
+  transition: opacity 0.3s ease;
+}
+
+.panel-grupos.oculta > *, .panel-subcategorias.oculta > * {
+  opacity: 0;
+}
+
+.panel-grupos:not(.oculta) > *, .panel-subcategorias:not(.oculta) > * {
+  opacity: 1;
+}
+
+
+  
 #volverArriba { z-index: 997; }
 #loginToggleBtn { z-index: 997; }
 #loginFloatingForm { z-index: 997; }
