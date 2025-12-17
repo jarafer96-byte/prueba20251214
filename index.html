@@ -32,45 +32,40 @@
   margin-right: auto;
 }
 
-/* Paso 1: Limpia completamente el fondo del body */
-body {
-  background-color: transparent !important;
-  background-image: none !important;
-  min-height: 100vh !important;
-  color: #e2e8f0 !important;
-  font-family: 'Quicksand', sans-serif !important;
+body.container.py-5.modo-oscuro {
+  position: relative !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 40px !important;
+  overflow: hidden !important;
+  padding: 60px !important;
+  margin: 20px auto;
+  max-width: 1400px;
 }
 
-/* Paso 2: Aplica el fondo al body en lugar del contenedor */
-body.container.py-5.modo-oscuro {
+body.container.py-5.modo-oscuro::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: 
     linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%),
     radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.2) 0%, transparent 30%),
-    radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.2) 0%, transparent 30%) !important;
-  
-  backdrop-filter: blur(40px) saturate(220%) brightness(1.2) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.2) !important;
-  
-  /* 🔥 AÑADE ESTAS 3 LÍNEAS CLAVE para que backdrop-filter respete border-radius */
-  overflow: hidden !important;
-  isolation: isolate !important;
-  position: relative !important;
-  
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  border-radius: 40px !important;
+    radial-gradient(circle at 85% 85%, rgba(14, 165, 233, 0.2) 0%, transparent 30%);
+  backdrop-filter: blur(40px) saturate(220%) brightness(1.2);
+  -webkit-backdrop-filter: blur(40px) saturate(220%) brightness(1.2);
+  border-radius: 40px;
+  z-index: -1;
+}
+
+/* Mantén el box-shadow en el body */
+body.container.py-5.modo-oscuro {
   box-shadow: 
     0 50px 120px rgba(0, 0, 0, 0.8),
     0 0 0 2px rgba(255, 255, 255, 0.2),
     inset 0 4px 30px rgba(255, 255, 255, 0.1),
     inset 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
-  padding: 60px !important;
-  margin: 20px auto; /* Centrar el contenedor con márgenes */
-  max-width: 1400px; /* Ajusta según necesites */
-}
-
-/* Paso 3: Asegurar que el HTML tenga fondo oscuro detrás */
-html {
-  background-color: #0a0a0f;
 }
   
 h1, h2, h3, .btn, .card { font-family: 'Raleway', sans-serif; }
