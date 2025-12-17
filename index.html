@@ -3668,36 +3668,37 @@ function ajustarPosicionesPaneles() {
 
   console.log("🔧 ajustando posiciones de paneles...");
 
-  // Forzar reflow para activar transiciones
-  void panelGrupos.offsetWidth;
-  void panelSub.offsetWidth;
-
+  // Solo ajustar si no están ocultos
   if (!panelGrupos.classList.contains('oculta')) {
     const alturaBarra = barraNav ? barraNav.offsetHeight : 0;
     panelGrupos.style.top = alturaBarra + 'px';
     panelGrupos.style.position = 'fixed';
     panelGrupos.style.left = '0';
-    panelSub.style.right = '0';
+    panelGrupos.style.right = '0';
     console.log("📐 Panel grupos → top:", panelGrupos.style.top, "alturaBarra:", alturaBarra);
   }
 
   if (!panelSub.classList.contains('oculta')) {
     const alturaBarra = barraNav ? barraNav.offsetHeight : 0;
-    const alturaGrupos = panelGrupos ? panelGrupos.offsetHeight : 0;
-    const margenAdicional = 19;
-    const desplazamientoArriba = -20;
-    const topCalc = alturaBarra + alturaGrupos + margenAdicional + desplazamientoArriba;
+    const alturaGrupos = panelGrupos.offsetHeight || 0;
+    const topCalc = alturaBarra + alturaGrupos;
     panelSub.style.top = topCalc + 'px';
     panelSub.style.position = 'fixed';
     panelSub.style.left = '0';
     panelSub.style.right = '0';
     console.log("📐 Panel subcategorias → top:", panelSub.style.top, 
                 "alturaBarra:", alturaBarra, "alturaGrupos:", alturaGrupos);
-  } else {
-    panelSub.style.top = '';
-    console.log("📂 Panel subcategorias oculto");
   }
+
+  // Logs de diagnóstico
+  const styleGrupos = window.getComputedStyle(panelGrupos);
+  const styleSub = window.getComputedStyle(panelSub);
+  console.log("👁️ PanelGrupos - display:", styleGrupos.display, "opacity:", styleGrupos.opacity, "top:", styleGrupos.top);
+  console.log("👁️ PanelSub - display:", styleSub.display, "opacity:", styleSub.opacity, "top:", styleSub.top);
 }
+
+
+    
 ////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", () => {
   // Ajustar posiciones al cargar y al redimensionar
