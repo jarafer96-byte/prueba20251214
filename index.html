@@ -833,7 +833,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("📱 Usando giroscopio para efecto parallax");
       
       window.addEventListener('deviceorientation', function(event) {
-        const gamma = event.gamma || 0; /
+        const gamma = event.gamma || 0;
         const beta = event.beta || 0;  
         const moveX = (gamma / 90) * intensity * 100;
         const moveY = ((beta - 90) / 90) * intensity * 100;
