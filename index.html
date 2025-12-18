@@ -2836,68 +2836,7 @@ function renderProducto(p) {
     console.log("✅ Animación CSS de ofertas agregada");
   }
 })();
-function setupEnhancedLazyLoading() {
-  // Solo en móviles o si hay muchas imágenes
-  const isHeavyPage = document.querySelectorAll('.lazy-image').length > 20;
-  
-  if (!('IntersectionObserver' in window) || !isHeavyPage) {
-    console.log('📱 Usando lazy loading nativo');
-    return; // Usar el nativo si no hay muchas imágenes
-  }
-  
-  const config = {
-    root: null,
-    rootMargin: window.innerWidth < 768 ? '150px' : '100px', // Más margen en móvil
-    threshold: 0.01
-  };
-  
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        
-        // Precargar imagen en segundo plano
-        const tempImg = new Image();
-        tempImg.src = img.dataset.src || img.src;
-        
-        tempImg.onload = () => {
-          // Cuando ya está en caché, mostrar inmediatamente
-          img.style.opacity = '0';
-          setTimeout(() => {
-            img.style.opacity = '1';
-          }, 50);
-        };
-        
-        observer.unobserve(img);
-      }
-    });
-  }, config);
-  
-  // Observar solo imágenes fuera del viewport inicial
-  document.querySelectorAll('.lazy-image').forEach((img, index) => {
-    // No observar las primeras 4 imágenes (ya visibles)
-    if (index > 4) {
-      imageObserver.observe(img);
-    }
-  });
-}
 
-// 3. PRIORIZAR IMÁGENES EN VIEWPORT
-function loadVisibleImagesFirst() {
-  const viewportHeight = window.innerHeight;
-  const scrollTop = window.pageYOffset;
-  
-  document.querySelectorAll('.lazy-image').forEach(img => {
-    const rect = img.getBoundingClientRect();
-    const isVisible = rect.top < viewportHeight + 100 && rect.bottom > -100;
-    
-    if (isVisible && img.dataset.src) {
-      // Forzar carga inmediata de imágenes visibles
-      img.src = img.dataset.src;
-      delete img.dataset.src;
-    }
-  });
-}
 function actualizarUIStock(idProducto, stockDisponible, talleSeleccionado) {
   const stockSpan = document.getElementById(`stock_${idProducto}`);
   const cantidadInput = document.getElementById(`cantidad_${idProducto}`);
